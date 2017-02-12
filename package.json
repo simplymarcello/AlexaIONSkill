@@ -1,0 +1,23 @@
+{
+  "name": "alexaionskill",
+  "version": "1.0.0",
+  "description": "Alexa ION skill running on the Alexa ION server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplymarcello/AlexaIONSkill.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simplymarcello/AlexaIONSkill/issues"
+  },
+  "homepage": "https://github.com/simplymarcello/AlexaIONSkill#readme",
+  "dependencies": {
+    "alexa-app": "^3.0.0"
+  },
+  "devDependencies": {}
+}
