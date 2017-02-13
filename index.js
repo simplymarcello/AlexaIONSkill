@@ -3,6 +3,7 @@ module.change_code = 1;
 
 var alexa = require( 'alexa-app' );
 var app = new alexa.app( 'alexaionskill' );
+var https = require('https');
 
 
 app.launch( function( request, response ) {
@@ -24,7 +25,6 @@ app.intent('sayNumber',
         "say the number {1-100|number}",
         "give me the number {1-100|number}",
         "tell me the number {1-100|number}",
-        "respond with the number {1-100|number}",
         "I want to hear you say the number {1-100|number}"]
   },
   function(request,response) {
@@ -33,31 +33,48 @@ app.intent('sayNumber',
   }
 );
 
-// app.intent('getData',
-//   {
-//       "utterances":[ 
-//         "get data",
-//         "process data"]
-//   },
-//   function(request,response) {
-//     http = require("http")
-//     url  = require("url")
+app.intent('getData',
+  {
+    "utterances":[ 
+        "get data"
+    ]
+  },
+  function(request,response) {
+    var options = {
+        host: '52.5.106.181',
+        port: 7443,
+        path: "/ionapi/metadata/v1/infor/version",
+        method: 'GET',
+        rejectUnauthorized: false,
+        headers: { 
+            'Accept': 'application/json',
+            'Authorization': 'Bearer aeb07dd32a1e6e6120bd1dbcf962c316',
+            'x-ionapi-docrequest': 'SWAGGER' 
+        }
 
-//     proxy = url.parse(process.env.PROXIMO_URL)
-
-//     options =
-//       hostname: proxy.hostname
-//       port:     proxy.port || 80
-//       path:     "https://jsonplaceholder.typicode.com/posts/1"
-//       headers:
-//         "Proxy-Authorization": "Basic #{new Buffer(proxy.auth).toString("base64")}"
-
-//     http.get options, (res) ->
-//       console.log "status code", res.statusCode
-//       console.log "headers", res.headers
-//     response.say("You asked for the number "+number);
-//   }
-// );
-
+    };
+    var req = https.request(options, function(res) {
+      res.on('data', function(d) {
+          const sessionAttributes = {};
+          const cardTitle = 'Welcome';
+          const speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
+          // If the user either does not reply to the welcome message or says something that is not
+          // understood, they will be prompted again with this text.
+          const shouldEndSession = true;
+          const repromptText = '';
+          repsonse.say(speechOutput);
+      });
+      res.on('error', function(err) {
+          const sessionAttributes = {};
+          const cardTitle = 'Welcome';
+          const speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
+          // If the user either does not reply to the welcome message or says something that is not
+          // understood, they will be prompted again with this text.
+          const shouldEndSession = true;
+          const repromptText = '';
+          repsonse.say(speechOutput);
+      });
+    });
+  });
 
 module.exports = app;
