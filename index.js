@@ -42,7 +42,9 @@ app.intent('getData',
     ]
   },
   function(request,response) {
-
+    function getResponse() {
+      return ;
+    }
     var speechOutput
     var options = {
         host: '52.5.106.181',
@@ -58,21 +60,17 @@ app.intent('getData',
 
     };
     console.log("Calling request")
-    async.series([
-        https.request(options, function(res) {
+        https.request(options, function(response, res) {
         console.log("Inside request")
         res.on('data', function(d) {
             console.log("request Returned");
             speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
             console.log(speechOutput);
-        });
+        }).then(response.say(speechOutput));
         res.on('error', function(err) {
             speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
-        });
+        }).then(response.say(speechOutput));
       });
-      response.say(speechOutput);
-    ]);
-
   }
 );
 
