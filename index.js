@@ -59,13 +59,14 @@ app.intent('getData',
     var req = https.request(options, function(res) {
       res.on('data', function(d) {
           speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
+          response.say(speechOutput);
       });
       res.on('error', function(err) {
           speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
+          response.say(speechOutput);
       });
     });
     req.end();
-    repsonse.say(speechOutput);
   }
 );
 
