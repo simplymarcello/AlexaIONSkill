@@ -55,13 +55,14 @@ app.intent('getData',
         }
 
     };
-    console.log("Calling requrest")
+    console.log("Calling request")
     var req = https.request(options, function(res) {
-      console.log("Inside requrest")
+      console.log("Inside request")
       res.on('data', function(d) {
-          console.log("Requrest Returned");
+          console.log("request Returned");
           speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
           console.log(speechOutput);
+          response.say(speechOutput);
       });
       res.on('error', function(err) {
           speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
