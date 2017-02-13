@@ -41,7 +41,7 @@ app.intent('getData',
     ]
   },
   function(request,response) {
-    const speechOutput = ""
+    var speechOutput = ""
     var options = {
         host: '52.5.106.181',
         port: 7443,
