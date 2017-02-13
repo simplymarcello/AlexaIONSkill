@@ -36,7 +36,8 @@ app.intent('sayNumber',
 app.intent('getData',
   {
     "utterances":[ 
-        "get data"
+        "get data",
+        "pull data"
     ]
   },
   function(request,response) {
@@ -63,6 +64,7 @@ app.intent('getData',
           repsonse.say(speechOutput);
       });
     });
-  });
+  }
+);
 
 module.exports = app;
