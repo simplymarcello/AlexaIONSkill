@@ -54,6 +54,7 @@ app.intent('getData',
         }
 
     };
+    console.log("Calling requrest")
     var req = https.request(options, function(res) {
       res.on('data', function(d) {
           const speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
@@ -66,5 +67,6 @@ app.intent('getData',
     });
   }
 );
+
 
 module.exports = app;
