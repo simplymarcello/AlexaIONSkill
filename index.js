@@ -41,6 +41,7 @@ app.intent('getData',
     ]
   },
   function(request,response) {
+    const speechOutput = ""
     var options = {
         host: '52.5.106.181',
         port: 7443,
@@ -56,14 +57,14 @@ app.intent('getData',
     };
     var req = https.request(options, function(res) {
       res.on('data', function(d) {
-          const speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
-          repsonse.say(speechOutput);
+          speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
       });
       res.on('error', function(err) {
-          const speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
-          repsonse.say(speechOutput);
+          speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
       });
     });
+    req.end();
+    repsonse.say(speechOutput);
   }
 );
 
