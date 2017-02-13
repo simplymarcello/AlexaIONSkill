@@ -41,7 +41,7 @@ app.intent('getData',
     ]
   },
   function(request,response) {
-    var speechOutput = ""
+    var speechOutput = "Welcome, I was unable to get the version number of the Metadata API."
     var options = {
         host: '52.5.106.181',
         port: 7443,
