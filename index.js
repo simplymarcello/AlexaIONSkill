@@ -55,23 +55,11 @@ app.intent('getData',
     };
     var req = https.request(options, function(res) {
       res.on('data', function(d) {
-          const sessionAttributes = {};
-          const cardTitle = 'Welcome';
           const speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
-          // If the user either does not reply to the welcome message or says something that is not
-          // understood, they will be prompted again with this text.
-          const shouldEndSession = true;
-          const repromptText = '';
           repsonse.say(speechOutput);
       });
       res.on('error', function(err) {
-          const sessionAttributes = {};
-          const cardTitle = 'Welcome';
           const speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
-          // If the user either does not reply to the welcome message or says something that is not
-          // understood, they will be prompted again with this text.
-          const shouldEndSession = true;
-          const repromptText = '';
           repsonse.say(speechOutput);
       });
     });
