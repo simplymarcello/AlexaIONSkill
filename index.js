@@ -4,6 +4,7 @@ module.change_code = 1;
 var alexa = require( 'alexa-app' );
 var app = new alexa.app( 'alexaionskill' );
 var https = require('https');
+var async = require("async");
 
 
 app.launch( function( request, response ) {
@@ -41,7 +42,8 @@ app.intent('getData',
     ]
   },
   function(request,response) {
-    var speechOutput = "Welcome, I was unable to get the version number of the Metadata API."
+
+    var speechOutput
     var options = {
         host: '52.5.106.181',
         port: 7443,
@@ -56,20 +58,21 @@ app.intent('getData',
 
     };
     console.log("Calling request")
-    var req = https.request(options, function(res) {
-      console.log("Inside request")
-      res.on('data', function(d) {
-          console.log("request Returned");
-          speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
-          console.log(speechOutput);
-          response.say(speechOutput);
+    async.series([
+        https.request(options, function(res) {
+        console.log("Inside request")
+        res.on('data', function(d) {
+            console.log("request Returned");
+            speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
+            console.log(speechOutput);
+        });
+        res.on('error', function(err) {
+            speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
+        });
       });
-      res.on('error', function(err) {
-          speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
-      });
-    });
-    req.end();
-    response.say(speechOutput);
+      response.say(speechOutput);
+    ]);
+
   }
 );
 
