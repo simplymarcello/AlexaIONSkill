@@ -25,6 +25,7 @@ app.intent('sayNumber',
         "give me the number {1-100|number}",
         "tell me the number {1-100|number}",
         "repeat the number {1-100|number}",
+        "respond with the number {1-100|number}",
         "I want to hear you say the number {1-100|number}"]
   },
   function(request,response) {
