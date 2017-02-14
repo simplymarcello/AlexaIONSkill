@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/simplymarcello/AlexaIONSkill#readme",
   "dependencies": {
-    "alexa-app": "^3.0.0"
+    "alexa-app": "^3.0.0",
+    "async": "^2.1.4"
   },
   "devDependencies": {}
 }

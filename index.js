@@ -1,10 +1,9 @@
 module.change_code = 1;
 'use strict';
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 var alexa = require( 'alexa-app' );
 var app = new alexa.app( 'alexaionskill' );
-var https = require('https');
-var async = require("async");
+var request = require('sync-request');
 
 
 app.launch( function( request, response ) {
@@ -42,10 +41,8 @@ app.intent('getData',
     ]
   },
   function(request,response) {
-    function getResponse() {
-      return ;
-    }
-    var speechOutput
+
+    var speechOutput = ""
     var options = {
         host: '52.5.106.181',
         port: 7443,
@@ -54,23 +51,14 @@ app.intent('getData',
         rejectUnauthorized: false,
         headers: { 
             'Accept': 'application/json',
-            'Authorization': 'Bearer aeb07dd32a1e6e6120bd1dbcf962c316',
+            'Authorization': 'Bearer 3732a6052dfd0962a76dca14a09f043f',
             'x-ionapi-docrequest': 'SWAGGER' 
         }
 
     };
-    console.log("Calling request")
-        https.request(options, function(response, res) {
-        console.log("Inside request")
-        res.on('data', function(d) {
-            console.log("request Returned");
-            speechOutput = 'Welcome, the current version number of the Metadata API is ' + d.toString('utf8');
-            console.log(speechOutput);
-        }).then(response.say(speechOutput));
-        res.on('error', function(err) {
-            speechOutput = 'Welcome, I was unable to get the version number of the Metadata API.';
-        }).then(response.say(speechOutput));
-      });
+    var res = request("get","https://52.5.106.181:7443/ionapi/metadata/v1/infor/version",options);
+    speechOutput = 'Welcome, the current version number of the Metadata API is ' + res.body.toString('utf8');
+    response.say(speechOutput);
   }
 );
 
