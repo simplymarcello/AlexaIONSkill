@@ -52,11 +52,9 @@ app.intent('getData',
     var options = {
         headers: headers
     };
-
-    };
-    console.log("calling request");
+    console.log("calling request")
     var res = Srequest("get","https://52.5.106.181:7443/ionapi/metadata/v1/infor/version",options);
-    console.log("request returned");
+    console.log("request returned")
     speechOutput = 'Welcome, the current version number of the Metadata API is ' + res.body.toString('utf8');
     response.say(speechOutput);
   }
