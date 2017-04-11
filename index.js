@@ -45,7 +45,7 @@ app.intent('getData',
     var speechOutput = ""
     var headers = {
         'Accept': 'application/json',
-        'Authorization': 'Bearer c702afd9fdcd690b5cfdd3491cdcf747',
+        'Authorization': 'Bearer add3e7347d6c92f8f5a18a148a851348',
         'x-ionapi-docrequest': 'SWAGGER',
         "rejectUnauthorized": false
     };
