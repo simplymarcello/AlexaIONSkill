@@ -19,21 +19,21 @@ app.error = function( exception, request, response ) {
     response.say( 'Sorry an error occured ' + error.message);
 };
 
-app.intent('sayNumber',
-  {
-    "slots":{"number":"NUMBER"}
-    ,"utterances":[ 
-        "say the number {1-100|number}",
-        "give me the number {1-100|number}",
-        "tell me the number {1-100|number}",
-        "I want to hear you say the number {1-100|number}"]
-  },
-  function(request,response) {
-    var number = request.slot('number');
-    console.log(request.slot('number'));
-    response.say("You asked for the number "+number);
-  }
-);
+// app.intent('sayNumber',
+//   {
+//     "slots":{"number":"NUMBER"}
+//     ,"utterances":[ 
+//         "say the number {1-100|number}",
+//         "give me the number {1-100|number}",
+//         "tell me the number {1-100|number}",
+//         "I want to hear you say the number {1-100|number}"]
+//   },
+//   function(request,response) {
+//     var number = request.slot('number');
+//     console.log(request.slot('number'));
+//     response.say("You asked for the number "+number);
+//   }
+// );
 
 app.intent('test',
   {
