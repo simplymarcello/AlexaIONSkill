@@ -39,7 +39,7 @@ app.intent('test',
   {
     "slots":{"code":"LITERAL"}
     ,"utterances":[ 
-        "say the code {A-Z|code}",
+        "say {code}",
         ]
   },
   function(request,response) {
