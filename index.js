@@ -30,6 +30,7 @@ app.intent('sayNumber',
   },
   function(request,response) {
     var number = request.slot('number');
+    console.log(request.slot('number'));
     response.say("You asked for the number "+number);
   }
 );
