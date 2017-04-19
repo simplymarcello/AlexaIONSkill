@@ -35,6 +35,20 @@ app.intent('sayNumber',
   }
 );
 
+app.intent('test',
+  {
+    "slots":{"code":"LITERAL"}
+    ,"utterances":[ 
+        "say the code {code}",
+        ]
+  },
+  function(request,response) {
+    var code = request.slot('code');
+    console.log(request.slot('code'));
+    response.say("You asked for the code "+code);
+  }
+);
+
 app.intent('getData',
   {
     "utterances":[ 
