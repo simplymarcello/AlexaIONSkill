@@ -39,7 +39,7 @@ app.intent('GetCodeIntent',
   {
     "slots":{"code":"LITERAL"}
     ,"utterances":[ 
-        "update code {one two three four five|code}",
+        "update code {|A-Z|1-100|code}",
         ]
   },
   function(request,response) {
