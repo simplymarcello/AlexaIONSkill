@@ -37,15 +37,21 @@ app.error = function( exception, request, response ) {
 
 app.intent('GetCodeIntent',
   {
-    "slots":{"CODENUM":"LITERAL"}
+    "slots":{"CODENUM1":"LITERAL","CODENUM2":"LITERAL","CODENUM3":"LITERAL","CODENUM4":"LITERAL","CODENUM5":"LITERAL","CODENUM6":"LITERAL","CODENUM7":"LITERAL"}
     ,"utterances":[ 
-        "update code {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM}",
+        "update code {|0-9|CODENUM1} {|0-9|CODENUM2} {|0-9|CODENUM3} {|0-9|CODENUM4} {|0-9|CODENUM5} {|0-9|CODENUM6} {|0-9|CODENUM7}",
         ]
   },
   function(request,response) {
-    var code = request.slot('CODENUM');
-    console.log(request.slot('CODENUM'));
-    response.say("You asked for the code " + code);
+    var code1 = request.slot('CODENUM');
+    console.log(request.slot('CODENUM1'));
+    console.log(request.slot('CODENUM2'))
+    console.log(request.slot('CODENUM3'))
+    console.log(request.slot('CODENUM4'))
+    console.log(request.slot('CODENUM5'))
+    console.log(request.slot('CODENUM6'))
+    console.log(request.slot('CODENUM7'))
+    response.say("You asked for the code.");
   }
 );
 
