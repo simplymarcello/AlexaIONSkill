@@ -44,7 +44,7 @@ app.intent('GetCodeIntent',
   },
   function(request,response) {
     var code = request.slot('CODE');
-    console.log(request.slot('CODE'));
+    console.log(request.slot('CODE')toUpperCase().replace(/\s/g,''));
     response.say("You asked for the code " + code);
   }
 );
