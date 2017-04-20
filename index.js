@@ -37,15 +37,15 @@ app.error = function( exception, request, response ) {
 
 app.intent('GetCodeIntent',
   {
-    "slots":{"code":"LITERAL"}
+    "slots":{"CODENUM":"LITERAL"}
     ,"utterances":[ 
-        "update code {|code}",
+        "update code {zero|CODENUM}",
         ]
   },
   function(request,response) {
-    var code = request.slot('code');
-    console.log(request.slot('code'));
-    response.say("You asked for the code");
+    var code = request.slot('CODENUM');
+    console.log(request.slot('CODENUM'));
+    response.say("You asked for the code " + code);
   }
 );
 
