@@ -35,11 +35,11 @@ app.error = function( exception, request, response ) {
 //   }
 // );
 
-app.intent('test',
+app.intent('GetCodeIntent',
   {
     "slots":{"code":"LITERAL"}
     ,"utterances":[ 
-        "say {code}",
+        "update code {one two three four five|code}",
         ]
   },
   function(request,response) {
