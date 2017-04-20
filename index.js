@@ -39,7 +39,7 @@ app.intent('GetCodeIntent',
   {
     "slots":{"CODENUM":"LITERAL"}
     ,"utterances":[ 
-        "update code {zero|CODENUM}",
+        "update code {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM} {|0-9|CODENUM}",
         ]
   },
   function(request,response) {
