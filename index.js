@@ -77,7 +77,7 @@ app.intent('GetCodeIntent',
     var nodesByName = document.getElementsByTagName('NameValue');
     var QTY = nodesByName[0].childNodes[0].nodeValue.toString();
     console.log(QTY);
-    speechOutput = 'The Item '+CODE' has a quantity of '+QTY+' in inventory.'
+    speechOutput = 'The Item '+CODE+' has a quantity of '+QTY+' in inventory.'
     response.say(speechOutput);
   }
 );
