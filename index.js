@@ -39,13 +39,43 @@ app.intent('GetCodeIntent',
   {
     "slots":{"CODE":"ITEMCODES"}
     ,"utterances":[ 
-        "update code {CODE}",
+        "How much inventory of item {CODE} do we have",
+        "Look up inventory for item {CODE}"
         ]
   },
   function(request,response) {
-    var code = request.slot('CODE');
-    console.log(request.slot('CODE').toUpperCase().replace(/\s/g,''));
-    response.say("You asked for the code " + code);
+    var CODE = request.slot('CODE').toUpperCase().replace(/\s/g,'')
+    console.log(CODE);
+    var options = {
+      headers: { 'cache-control': 'no-cache', 'content-type': 'text/xml' },
+      body: '<soapenv:Envelope xmlns:pur="http://www.infor.com/businessinterface/GenericQuery" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">'+
+                '<soapenv:Header>'+
+                    '<pur:Activation>'+
+                        '<username>Prefs</username>'+
+                        '<password>!nfor08</password>'+
+                        '<company>121</company>'+
+                    '</pur:Activation>'+
+                '</soapenv:Header>'+
+                '<soapenv:Body>'+
+                    '<pur:Show>'+
+                        '<ShowRequest>'+
+                            '<DataArea>'+
+                                '<GenericQuery>'+
+                                    '<Definition>select whwmd215.qhnd:qty from whwmd215 where whwmd215.item=&quot;         '+code.toString()+'&quot;</Definition>'+
+                            '</DataArea>'+
+                        '</ShowRequest>'+
+                    '</pur:Show>'+
+                '</soapenv:Body>'+
+            '</soapenv:Envelope>' 
+    };
+    var res = Srequest("POST","http://ln2014-1.gdeinfor2.com:8312/c4ws/services/GenericQuery/LN2014_1_121",options);
+    var document = DOMParser.parseFromString(res.body.toString('utf8'));
+    var nodeById = document.getElementById('Output');
+    var nodesByName = document.getElementsByTagName('NameValue');
+    var QTY = nodesByName[0].childNodes[0].nodeValue.toString();
+    console.log(QTY);
+    speechOutput = 'The Item '+CODE+' has a quantity of '+QTY+' in inventory.'
+    response.say(speechOutput);
   }
 );
 
