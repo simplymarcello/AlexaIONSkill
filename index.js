@@ -70,12 +70,14 @@ app.intent('GetCodeIntent',
     };
     console.log('<Definition>select whwmd215.qhnd:qty from whwmd215 where whwmd215.item=&quot;         '+CODE.toString()+'&quot;</Definition>')
     var res = Srequest("POST","http://ln2014-1.gdeinfor2.com:8312/c4ws/services/GenericQuery/LN2014_1_121",options);
-    var document = DOMParser.parseFromString(res.body.toString('utf8'));
-    var nodeById = document.getElementById('Output');
-    var nodesByName = document.getElementsByTagName('NameValue');
-    var QTY = nodesByName[0].childNodes[0].nodeValue.toString();
-    console.log(QTY);
-    speechOutput = 'The Item '+CODE+' has a quantity of '+QTY+' in inventory.'
+    console.log(res.body.toString('utf8'))
+    // var document = DOMParser.parseFromString(res.body.toString('utf8'));
+    // var nodeById = document.getElementById('Output');
+    // var nodesByName = document.getElementsByTagName('NameValue');
+    // var QTY = nodesByName[0].childNodes[0].nodeValue.toString();
+    // console.log(QTY);
+    speechOutput = 'The Item was '+CODE
+    //' has a quantity of '+QTY+' in inventory.'
     response.say(speechOutput);
   }
 );
