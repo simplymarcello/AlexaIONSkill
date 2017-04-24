@@ -62,6 +62,7 @@ app.intent('GetCodeIntent',
                             '<DataArea>'+
                                 '<GenericQuery>'+
                                     '<Definition>select whwmd215.qhnd:qty from whwmd215 where whwmd215.item=&quot;         '+CODE.toString()+'&quot;</Definition>'+
+                                '</GenericQuery>'+
                             '</DataArea>'+
                         '</ShowRequest>'+
                     '</pur:Show>'+
