@@ -68,6 +68,7 @@ app.intent('GetCodeIntent',
                 '</soapenv:Body>'+
             '</soapenv:Envelope>' 
     };
+    console.log('<Definition>select whwmd215.qhnd:qty from whwmd215 where whwmd215.item=&quot;         '+CODE.toString()+'&quot;</Definition>')
     var res = Srequest("POST","http://ln2014-1.gdeinfor2.com:8312/c4ws/services/GenericQuery/LN2014_1_121",options);
     var document = DOMParser.parseFromString(res.body.toString('utf8'));
     var nodeById = document.getElementById('Output');
